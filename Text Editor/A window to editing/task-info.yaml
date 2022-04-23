@@ -65,12 +65,9 @@ files:
         }
     }
   learner_created: false
-- name: src/editor/A.java
-  visible: true
-  learner_created: true
-- name: src/editor/B.java
-  visible: true
-  learner_created: true
 feedback_link: https://hyperskill.org/projects/38/stages/201/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Sat, 23 Apr 2022 20:05:05 UTC
+record: 1

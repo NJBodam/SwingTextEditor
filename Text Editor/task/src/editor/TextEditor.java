@@ -14,12 +14,10 @@ public class TextEditor extends JFrame {
     }
 
     private void initComponents() {
-        JLabel nameLabel = new JLabel("Your Name");
-        nameLabel.setBounds(40,20, 100,30);
-        add(nameLabel);
 
-        JTextField nameTextField = new JTextField();
-        nameTextField.setBounds(140,20, 120,30);
-        add(nameTextField);
+        JTextArea textArea = new JTextArea();
+        textArea.setBounds(20,20, 560,540);
+        textArea.setName("TextArea");
+        add(textArea);
     }
 }
