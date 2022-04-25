@@ -1,10 +1,10 @@
-<h5 style="text-align: center;" id="description">Description</h5>
+<h5 style="text-align: center;" id="description" id="description">Description</h5>
 
 <p>In this stage, you will improve the usability of your text editor.</p>
 
 <p>The first thing to point out is that the "Save" and "Load" buttons take up a lot of space on the screen. You can't add a lot of buttons to the top bar when they contain text. This problem can be solved using icons instead of text. The constructor of <code class="language-java">JButton</code> can take an <code class="language-java">ImageIcon</code> instead of text. You should replace the buttons "Load" and "Save" with corresponding icons. You can download the icons from the internet.</p>
 
-<p>It is also impractical to restrict users to load (open) a file from only one directory, i.e. the project folder. The Swing library has a useful component for navigating your filesystem called <code class="language-java">JFileChooser</code>. So, when the user clicks on the "Open" button (the button that was previously named "Load") you should open a file manager using <code class="language-java">JFileChooser</code> and let the user choose the file he wants to open. Then, the contents of this file should be visible in the text editor. You follow <a target="_blank" href="http://www.mkyong.com/swing/java-swing-jfilechooser-example/" rel="nofollow noopener noreferrer">this</a> link to see how to use <code class="language-java">JFileChooser</code>.</p>
+<p>It is also impractical to restrict users to load (open) a file from only one directory, i.e. the project folder. The Swing library has a useful component for navigating your filesystem called <code class="language-java">JFileChooser</code>. So, when the user clicks on the "Open" button (the button that was previously named "Load") you should open a file manager using <code class="language-java">JFileChooser</code> and let the user choose the file he wants to open. Then, the contents of this file should be visible in the text editor. You follow <a target="_blank" target="_blank" href="http://www.mkyong.com/swing/java-swing-jfilechooser-example/" rel="nofollow noopener noreferrer">this</a> link to see how to use <code class="language-java">JFileChooser</code>.</p>
 
 <p>Also, you should add a search panel. It should contain a text field, a "Start search" button, a "Previous match" button and a "Next match” button. All of these buttons should also be icons. The search can be performed by regular expressions or by plain text. For this, you should add a checkbox that is checked when the user wants to search using a regular expression. You can use <code class="language-java">JCheckBox</code> for this. The search can slow down the GUI thread, so you should implement the search in a separate thread.</p>
 
@@ -44,7 +44,7 @@ textArea.grabFocus();</code></pre>
 
 <p>For the testing reasons, you should use a single instance of <code class="language-java">JFileChooser</code>. Add this instance to the frame using <code class="language-java">add</code> method. Hide this instance of JFileChooser if it isn't needed at the moment and show it when it is.</p>
 
-<h5 style="text-align: center;" id="example">Example</h5>
+<h5 style="text-align: center;" id="example" id="example">Example</h5>
 
 <p>Below is an example of what your text editor might look like:</p>
 

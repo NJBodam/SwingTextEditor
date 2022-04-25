@@ -11,24 +11,16 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class TextEditor extends JFrame {
-    File file = new File("textEditorFile.txt"); // some file
+    File filenameField = new File("textEditorFile.txt"); // some file
+    FlowLayout flowLayout = new FlowLayout();
+    JButton saveButton = new JButton("SaveButton");
+    JButton loadButton = new JButton("LoadButton");
+    JTextField title = new JTextField();
+    JTextArea textArea = new JTextArea(20, 30);
 
 
     public TextEditor() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 600);
-        setVisible(true);
-
-        //BorderLayout borderLayout = new BorderLayout();
-//        add(new JButton("North"), BorderLayout.NORTH);
-//        add(new JButton("South"), BorderLayout.SOUTH);
-//        add(new JButton("West"), BorderLayout.WEST);
-//        add(new JButton("East"), BorderLayout.EAST);
-//        add(new JButton("Center"), BorderLayout.CENTER);
-
-        setTitle("Text Editor");
-
-        initComponents();
+        super("Text Editor");
     }
 
     private void fileWriter(File file, String textArea) {
@@ -53,54 +45,64 @@ public class TextEditor extends JFrame {
         return new String(Files.readAllBytes(Paths.get(file)));
     }
 
+    private static void createShowGUI() {
+        //Create and set up the window.
+        TextEditor frame = new TextEditor();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Set up the content pane.
+        frame.addComponentsToPane(frame.getContentPane());
+        //Display the window.
+        frame.setSize(500, 500);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    private void initComponents(final Container pane) {
+        final JPanel comps = new JPanel();
+        comps.setLayout(new FlowLayout());
+
+        JPanel controls = new JPanel();
+        controls.setLayout(new BorderLayout());
+
+        JPanel txtPanel = new JPanel();
+        txtPanel.setLayout(new FlowLayout());
+
+        comps.add(saveButton, BorderLayout.EAST);
+        comps.add(loadButton, BorderLayout.WEST);
+        comps.setLayout(new FlowLayout());
+
+        controls.add(title, BorderLayout.WEST);
+        controls.add(comps, BorderLayout.LINE_END);
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        add(scrollPane);
+
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        pane.add(controls, BorderLayout.CENTER);
+        pane.add(scrollPane, BorderLayout.SOUTH);
 
 
-    private void initComponents() {
 
-    JTextArea textArea = new JTextArea();
-    textArea.setBounds(20,20, 560,540);
-    textArea.setName("TextArea");
-
-    JScrollPane jScrollPane = new JScrollPane(textArea);
-    jScrollPane.setBounds(20,20, 560,540);
-    jScrollPane.add(textArea);
-
-    add(jScrollPane);
-
-    FlowLayout flowLayout = new FlowLayout();
-    flowLayout.setAlignment(FlowLayout.TRAILING);
-
-    JPanel jPanel = new JPanel();
-    jPanel.setLayout(flowLayout);
-
-    JTextField title = new JTextField();
-    title.setBounds(140,20, 120,30);
-    add(title);
-
-
-
-    JButton saveButton = new JButton("SaveButton");
-
-    JButton loadButton = new JButton("LoadButton");
-
-    saveButton.addActionListener(e -> {
-        textArea.setName(title.getName());
-        String textBody = textArea.getText();
-        if (title.getName() != null && textBody.trim().length() > 0) {
-            fileWriter(file, textBody);
-        }
-    });
-
-    loadButton.addActionListener(e -> {
-        String body;
-        try {
-            body = readFileAsString(file.getPath());
-            title.setText(file.getName());
-            textArea.setText(body);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    });
+//    saveButton.addActionListener(e -> {
+//        textArea.setName(title.getName());
+//        String textBody = textArea.getText();
+//        if (title.getName() != null && textBody.trim().length() > 0) {
+//            fileWriter(file, textBody);
+//        }
+//    });
+//
+//    loadButton.addActionListener(e -> {
+//        String body;
+//        try {
+//            body = readFileAsString(file.getPath());
+//            title.setText(file.getName());
+//            textArea.setText(body);
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//    });
 
     }
 }
