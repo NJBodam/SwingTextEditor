@@ -15,7 +15,7 @@ public class TextEditor extends JFrame {
     FlowLayout flowLayout = new FlowLayout();
     JButton saveButton = new JButton("SaveButton");
     JButton loadButton = new JButton("LoadButton");
-    JTextField title = new JTextField();
+    JTextField title = new JTextField("doc.txt", 12);
     JTextArea textArea = new JTextArea(20, 30);
 
 
@@ -45,12 +45,12 @@ public class TextEditor extends JFrame {
         return new String(Files.readAllBytes(Paths.get(file)));
     }
 
-    private static void createShowGUI() {
-        //Create and set up the window.
+    static void createShowGUI() {
+        // Create and set up the window.
         TextEditor frame = new TextEditor();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Set up the content pane.
-        frame.addComponentsToPane(frame.getContentPane());
+        frame.initComponents(frame.getContentPane());
         //Display the window.
         frame.setSize(500, 500);
         frame.pack();
@@ -71,7 +71,7 @@ public class TextEditor extends JFrame {
         comps.add(loadButton, BorderLayout.WEST);
         comps.setLayout(new FlowLayout());
 
-        controls.add(title, BorderLayout.WEST);
+        controls.add(title, BorderLayout.LINE_START);
         controls.add(comps, BorderLayout.LINE_END);
 
         JScrollPane scrollPane = new JScrollPane(textArea);
@@ -85,24 +85,27 @@ public class TextEditor extends JFrame {
 
 
 
-//    saveButton.addActionListener(e -> {
-//        textArea.setName(title.getName());
-//        String textBody = textArea.getText();
-//        if (title.getName() != null && textBody.trim().length() > 0) {
-//            fileWriter(file, textBody);
-//        }
-//    });
-//
-//    loadButton.addActionListener(e -> {
-//        String body;
-//        try {
-//            body = readFileAsString(file.getPath());
-//            title.setText(file.getName());
-//            textArea.setText(body);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//    });
+    saveButton.addActionListener(e -> {
+        textArea.setName(title.getText());
+        String textBody = textArea.getText();
+        if (title.getText() != null && textBody.trim().length() > 0) {
+            System.err.println("it got here");
+            fileWriter(filenameField, textBody);
+            System.err.println("File saved successfully");
+        }
+    });
+
+    loadButton.addActionListener(e -> {
+        String body;
+        try {
+            body = readFileAsString(filenameField.getPath());
+            title.setText(filenameField.getName());
+            textArea.setText(body);
+            System.err.println("File loaded successfully");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    });
 
     }
 }
