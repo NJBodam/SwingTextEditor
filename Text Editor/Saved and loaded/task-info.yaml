@@ -241,11 +241,8 @@ files:
     }
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/5259#comment
-status: Failed
+status: Solved
 feedback:
-  message: |-
-    Error in test #1
-
-    Cannot find a component of class JTextComponent with name TextArea
-  time: Tue, 26 Apr 2022 09:19:45 UTC
+  message: Congratulations!
+  time: Wed, 27 Apr 2022 09:57:27 UTC
 record: 2
