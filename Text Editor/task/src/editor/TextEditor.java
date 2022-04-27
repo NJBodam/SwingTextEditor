@@ -53,6 +53,7 @@ public class TextEditor extends JFrame {
 
         JButton saveButton = new JButton("Save");
         saveButton.setName("SaveButton");
+        saveButton.setIcon();
 
         JButton loadButton = new JButton("Load");
         loadButton.setName("LoadButton");
@@ -64,20 +65,7 @@ public class TextEditor extends JFrame {
 
         setVisible(true);
 
-        saveButton.addActionListener(e -> {
-            File file = new File(filenameField.getText());
-            fileWriter(file, textArea.getText());
-            System.err.println("File saved successfully");
-        });
-
-        loadButton.addActionListener(e -> {
-            try {
-                textArea.setText(readFileAsString(filenameField.getText()));
-                System.err.println("File loaded successfully");
-            } catch (IOException ex) {
-                textArea.setText(null);
-            }
-        });
+        actionListener(saveButton, loadButton);
 
         menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -108,6 +96,23 @@ public class TextEditor extends JFrame {
 
     }
 
+    private void actionListener(JButton saveButton, JButton loadButton) {
+        saveButton.addActionListener(e -> {
+            File file = new File(filenameField.getText());
+            fileWriter(file, textArea.getText());
+            System.err.println("File saved successfully");
+        });
+
+        loadButton.addActionListener(e -> {
+            try {
+                textArea.setText(readFileAsString(filenameField.getText()));
+                System.err.println("File loaded successfully");
+            } catch (IOException ex) {
+                textArea.setText(null);
+            }
+        });
+    }
+
     private void fileWriter(File file, String textArea) {
         try (PrintWriter printWriter = new PrintWriter(file)) {
             printWriter.print(textArea);
@@ -131,146 +136,3 @@ public class TextEditor extends JFrame {
                 : new CompoundBorder(marginBorder, border));
     }
 }
-
-
-/*
-
-package editor;
-
-        import javax.swing.*;
-        import javax.swing.border.Border;
-        import javax.swing.border.CompoundBorder;
-        import javax.swing.text.JTextComponent;
-        import java.awt.*;
-        import java.io.File;
-        import java.io.FileNotFoundException;
-        import java.io.IOException;
-        import java.io.PrintWriter;
-        import java.nio.file.Files;
-        import java.nio.file.Paths;
-        import java.util.Scanner;
-
-public class TextEditor extends JFrame {
-
-    private static final Color SELECTION_COLOR = new Color(0x726825);
-
-    File filenameField = new File("textEditorFile.txt"); // some file
-    FlowLayout flowLayout = new FlowLayout();
-    JButton saveButton = new JButton("SaveButton");
-    JButton loadButton = new JButton("LoadButton");
-    JTextField title = new JTextField("doc.txt", 12);
-    JTextArea text = new JTextArea(20, 30);
-
-    private static JTextComponent textArea;
-
-    public TextEditor() {
-        super("Text Editor");
-    }
-
-    private void fileWriter(File file, String textArea) {
-        try (PrintWriter printWriter = new PrintWriter(file)) {
-            printWriter.print(textArea);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void fileReader(File file) {
-        try (Scanner sc = new Scanner(file)) {
-            if(sc.hasNextLine()) {
-                System.out.println(sc.nextLine());
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static String readFileAsString(String file) throws IOException {
-        return new String(Files.readAllBytes(Paths.get(file)));
-    }
-
-    static void createShowGUI() {
-        // Create and set up the window.
-
-        TextEditor frame = new TextEditor();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //Set up the content pane.
-        frame.initComponents(frame.getContentPane());
-        //Display the window.
-        frame.setSize(500, 500);
-        frame.pack();
-        frame.setVisible(true);
-
-        textArea.setName("TextArea");
-        textArea.setOpaque(false);
-        Insets margin = textArea.getMargin();
-        if (margin == null) {
-            margin = new Insets(5, 5, 5, 5);
-        }
-        Border marginBorder = BorderFactory.createEmptyBorder(
-                margin.top + 3, margin.left, margin.bottom + 3,
-                margin.right);
-        CompoundBorder border = new CompoundBorder(
-                BorderFactory.createLineBorder(Color.WHITE), marginBorder);
-
-        textArea.setBorder(border);
-        textArea.setBackground(Color.BLUE);
-        textArea.setForeground(Color.WHITE);
-        textArea.setSelectionColor(SELECTION_COLOR);
-        // textArea.add(frame);
-
-    }
-
-    private void initComponents(final Container pane) {
-        final JPanel comps = new JPanel();
-        comps.setLayout(new FlowLayout());
-
-        JPanel controls = new JPanel();
-        controls.setLayout(new BorderLayout());
-
-        JPanel txtPanel = new JPanel();
-        txtPanel.setLayout(new FlowLayout());
-
-        comps.add(saveButton, BorderLayout.EAST);
-        comps.add(loadButton, BorderLayout.WEST);
-        comps.setLayout(new FlowLayout());
-
-        controls.add(title, BorderLayout.LINE_START);
-        controls.add(comps, BorderLayout.LINE_END);
-
-        JScrollPane scrollPane = new JScrollPane(text);
-        add(scrollPane);
-
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
-        pane.add(controls, BorderLayout.CENTER);
-        pane.add(scrollPane, BorderLayout.SOUTH);
-
-
-
-        saveButton.addActionListener(e -> {
-            text.setName(title.getText());
-            String textBody = text.getText();
-            if (title.getText() != null && textBody.trim().length() > 0) {
-                System.err.println("it got here");
-                fileWriter(filenameField, textBody);
-                System.err.println("File saved successfully");
-            }
-        });
-
-        loadButton.addActionListener(e -> {
-            String body;
-            try {
-                body = readFileAsString(filenameField.getPath());
-                title.setText(filenameField.getName());
-                text.setText(body);
-                System.err.println("File loaded successfully");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-
-    }
-}
-*/
