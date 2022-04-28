@@ -18,9 +18,13 @@ public class TextEditor extends JFrame {
 
     final String MAIN_DIR = "/Users/mac/Desktop/BetterReads/Text Editor/Text Editor/task/src/images/";
     final String SAVE_ICON = "Save-icon.png";
-    final String JAVA_ICON = "icons/Java-icon.png";
-    final String EXIT_ICON = "icons/Button-exit-icon.png";
+    final String JAVA_ICON = "Java-icon.png";
+    final String EXIT_ICON = "Button-exit-icon.png";
     final String LOAD_ICON = "load1.png";
+    final String SEARCH_ICON = "search-icon.png";
+    final String PREV_ICON = "Button-Previous-icon.png";
+    final String NEXT_ICON = "Button-Next-icon.png";
+
     final int WIDTH = 600;
     final int HEIGHT = 400;
     JTextArea textArea;
@@ -31,6 +35,10 @@ public class TextEditor extends JFrame {
     JMenuItem menuItem;
     JButton saveButton;
     JButton loadButton;
+    JButton searchButton;
+    JButton prevButton;
+    JButton nextButton;
+
 
     public TextEditor() {
         super("Text Editor");
@@ -92,26 +100,41 @@ public class TextEditor extends JFrame {
         filenameField = new JTextField(30);
         filenameField.setName("FilenameField");
 
-        ImageIcon saveIcon = resizeImage(MAIN_DIR + SAVE_ICON, 40, 40);
+        ImageIcon saveIcon = resizeImage(MAIN_DIR + SAVE_ICON, 25, 25);
         saveButton = new JButton(saveIcon);
        // saveButton = new JButton(new ImageIcon(MAIN_DIR + SAVE_ICON));
         saveButton.setName("SaveButton");
-        saveButton.setPreferredSize(new Dimension(30, 30));
+    //    saveButton.setPreferredSize(new Dimension(30, 30));
 
 
         File file = new File("/Users/mac/Downloads/next.png");
         System.err.println(file.exists());
         System.out.println(new File("/Users/mac/Desktop/BetterReads/Text Editor/Text Editor/task/src/images/load1.png").exists());
 
-        ImageIcon loadIcon = resizeImage(MAIN_DIR + LOAD_ICON, 40, 40);
+        ImageIcon loadIcon = resizeImage(MAIN_DIR + LOAD_ICON, 25, 25);
         loadButton = new JButton(loadIcon);
       //  loadButton = new JButton(new ImageIcon(loadIcon));
         loadButton.setName("LoadButton");
-        loadButton.setPreferredSize(new Dimension(30, 30));
+       // loadButton.setPreferredSize(new Dimension(30, 30));
+
+        ImageIcon searchIcon = resizeImage(MAIN_DIR + SEARCH_ICON, 25, 25);
+        searchButton = new JButton(searchIcon);
+        searchButton.setName("SearchButton");
+
+        ImageIcon prevIcon = resizeImage(MAIN_DIR + PREV_ICON, 25, 25);
+        prevButton = new JButton(prevIcon);
+        prevButton.setName("PreviousButton");
+
+        ImageIcon nextIcon = resizeImage(MAIN_DIR + NEXT_ICON, 25, 25);
+        nextButton = new JButton(nextIcon);
+        nextButton.setName("NextButton");
 
         topBar.add(filenameField);
         topBar.add(saveButton);
         topBar.add(loadButton);
+        topBar.add(searchButton);
+        topBar.add(nextButton);
+        topBar.add(prevButton);
         return topBar;
     }
 
