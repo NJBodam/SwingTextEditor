@@ -658,6 +658,39 @@ files:
         }
     }
   learner_created: false
+- name: src/images/Save-icon.png
+  visible: true
+  learner_created: true
+- name: src/images/Files-New-File-icon.png
+  visible: true
+  learner_created: true
+- name: src/images/search-icon.png
+  visible: true
+  learner_created: true
+- name: src/images/Button-exit-icon.png
+  visible: true
+  learner_created: true
+- name: src/images/Button-Previous-icon.png
+  visible: true
+  learner_created: true
+- name: src/images/Java-icon.png
+  visible: true
+  learner_created: true
+- name: src/images/Button-Delete-icon.png
+  visible: true
+  learner_created: true
+- name: src/images/Button-Next-icon.png
+  visible: true
+  learner_created: true
+- name: src/images/load-icon.png
+  visible: true
+  learner_created: true
+- name: src/images/New-File-icon.png
+  visible: true
+  learner_created: true
+- name: src/images/load1.png
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/5261#comment
 status: Unchecked
 record: 4

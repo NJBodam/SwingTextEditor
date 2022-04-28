@@ -4,7 +4,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -13,10 +12,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 public class TextEditor extends JFrame {
-;
+
+
+    final String MAIN_DIR = "/Users/mac/Desktop/BetterReads/Text Editor/Text Editor/task/src/images/";
+    final String SAVE_ICON = "Save-icon.png";
+    final String JAVA_ICON = "icons/Java-icon.png";
+    final String EXIT_ICON = "icons/Button-exit-icon.png";
+    final String LOAD_ICON = "load1.png";
     final int WIDTH = 600;
     final int HEIGHT = 400;
     JTextArea textArea;
@@ -25,6 +29,8 @@ public class TextEditor extends JFrame {
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem menuItem;
+    JButton saveButton;
+    JButton loadButton;
 
     public TextEditor() {
         super("Text Editor");
@@ -45,23 +51,7 @@ public class TextEditor extends JFrame {
         appCont.add(new JLabel(" "), BorderLayout.SOUTH);
         appCont.add(new JLabel("    "), BorderLayout.WEST);
         appCont.add(new JLabel("    "), BorderLayout.EAST);
-
-        JPanel topBar = new JPanel();
-        topBar.setLayout(new FlowLayout(FlowLayout.CENTER));
-        filenameField = new JTextField(30);
-        filenameField.setName("FilenameField");
-
-        JButton saveButton = new JButton("Save");
-        saveButton.setName("SaveButton");
-        saveButton.setIcon();
-
-        JButton loadButton = new JButton("Load");
-        loadButton.setName("LoadButton");
-
-        topBar.add(filenameField);
-        topBar.add(saveButton);
-        topBar.add(loadButton);
-        appCont.add(topBar, BorderLayout.NORTH);
+        appCont.add(topBar(), BorderLayout.NORTH);
 
         setVisible(true);
 
@@ -94,6 +84,35 @@ public class TextEditor extends JFrame {
 
         menuBar.add(menu);
 
+    }
+
+    public JPanel topBar() {
+        JPanel topBar = new JPanel();
+        topBar.setLayout(new FlowLayout(FlowLayout.CENTER));
+        filenameField = new JTextField(30);
+        filenameField.setName("FilenameField");
+
+        ImageIcon saveIcon = resizeImage(MAIN_DIR + SAVE_ICON, 40, 40);
+        saveButton = new JButton(saveIcon);
+       // saveButton = new JButton(new ImageIcon(MAIN_DIR + SAVE_ICON));
+        saveButton.setName("SaveButton");
+        saveButton.setPreferredSize(new Dimension(30, 30));
+
+
+        File file = new File("/Users/mac/Downloads/next.png");
+        System.err.println(file.exists());
+        System.out.println(new File("/Users/mac/Desktop/BetterReads/Text Editor/Text Editor/task/src/images/load1.png").exists());
+
+        ImageIcon loadIcon = resizeImage(MAIN_DIR + LOAD_ICON, 40, 40);
+        loadButton = new JButton(loadIcon);
+      //  loadButton = new JButton(new ImageIcon(loadIcon));
+        loadButton.setName("LoadButton");
+        loadButton.setPreferredSize(new Dimension(30, 30));
+
+        topBar.add(filenameField);
+        topBar.add(saveButton);
+        topBar.add(loadButton);
+        return topBar;
     }
 
     private void actionListener(JButton saveButton, JButton loadButton) {
@@ -134,5 +153,10 @@ public class TextEditor extends JFrame {
                 aBottom, aRight));
         aComponent.setBorder(border == null ? marginBorder
                 : new CompoundBorder(marginBorder, border));
+    }
+
+    private ImageIcon resizeImage(String file, int width, int height) {
+        return new ImageIcon(new ImageIcon(file).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
+
     }
 }
