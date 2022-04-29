@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileSystemView;
+import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -39,11 +41,14 @@ public class TextEditor extends JFrame {
     JButton prevButton;
     JButton nextButton;
     JCheckBox regex;
+    JFileChooser jfc;
 
 
     public TextEditor() {
         super("Text Editor");
-        setSize(WIDTH, HEIGHT);
+      //  setSize(WIDTH, HEIGHT);
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setMinimumSize(new Dimension(WIDTH, HEIGHT));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -74,7 +79,7 @@ public class TextEditor extends JFrame {
         menu.setMnemonic(KeyEvent.VK_A);
         menuBar.add(menu);
 
-        menuItem = new JMenuItem("Load", KeyEvent.VK_O);
+        menuItem = new JMenuItem("Open", KeyEvent.VK_O);
         menuItem.setName("MenuLoad");
         menuItem.addActionListener(loadButton.getActionListeners()[0]);
         menu.add(menuItem);
@@ -118,7 +123,7 @@ public class TextEditor extends JFrame {
     public JPanel topBar() {
         JPanel topBar = new JPanel();
         topBar.setLayout(new FlowLayout(FlowLayout.CENTER));
-        filenameField = new JTextField(30);
+        filenameField = new JTextField(15);
         filenameField.setName("FilenameField");
 
         ImageIcon saveIcon = resizeImage(MAIN_DIR + SAVE_ICON);
@@ -126,7 +131,8 @@ public class TextEditor extends JFrame {
         saveButton.setName("SaveButton");
 
 // TODO: Delete this section when done.
-//      Reconfigure dir for images to src, Set fields to private and reduce code duplication
+//      Reconfigure dir for images to src, Set fields to private and reduce code duplication,
+//      Go back to last project and return an anonymous class object in place of the error dto
 //        File file = new File("/Users/mac/Downloads/next.png");
 //        System.err.println(file.exists());
 //        System.out.println(new File("/Users/mac/Desktop/BetterReads/Text Editor/Text Editor/task/src/images/load1.png").exists());
@@ -169,7 +175,11 @@ public class TextEditor extends JFrame {
 
         loadButton.addActionListener(e -> {
             try {
-                textArea.setText(readFileAsString(filenameField.getText()));
+                jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+                int returnValue = jfc.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    textArea.setText(readFileAsString(jfc.getSelectedFile().getAbsolutePath()));
+                }
             } catch (IOException ex) {
                 textArea.setText(null);
                 ex.printStackTrace();
