@@ -25,8 +25,8 @@ public class TextEditor extends JFrame {
     final String PREV_ICON = "Button-Previous-icon.png";
     final String NEXT_ICON = "Button-Next-icon.png";
 
-    final int WIDTH = 600;
-    final int HEIGHT = 400;
+    final int WIDTH = 620;
+    final int HEIGHT = 430;
     JTextArea textArea;
     Container appCont;
     JTextField filenameField;
@@ -38,6 +38,7 @@ public class TextEditor extends JFrame {
     JButton searchButton;
     JButton prevButton;
     JButton nextButton;
+    JCheckBox regex;
 
 
     public TextEditor() {
@@ -57,8 +58,8 @@ public class TextEditor extends JFrame {
 
         appCont.add(scrollableTextArea, BorderLayout.CENTER);
         appCont.add(new JLabel(" "), BorderLayout.SOUTH);
-        appCont.add(new JLabel("    "), BorderLayout.WEST);
-        appCont.add(new JLabel("    "), BorderLayout.EAST);
+//        appCont.add(new JLabel("    "), BorderLayout.WEST);
+//        appCont.add(new JLabel("    "), BorderLayout.EAST);
         appCont.add(topBar(), BorderLayout.NORTH);
 
         setVisible(true);
@@ -73,7 +74,7 @@ public class TextEditor extends JFrame {
         menu.setMnemonic(KeyEvent.VK_A);
         menuBar.add(menu);
 
-        menuItem = new JMenuItem("Load", KeyEvent.VK_L);
+        menuItem = new JMenuItem("Load", KeyEvent.VK_O);
         menuItem.setName("MenuLoad");
         menuItem.addActionListener(loadButton.getActionListeners()[0]);
         menu.add(menuItem);
@@ -92,6 +93,26 @@ public class TextEditor extends JFrame {
 
         menuBar.add(menu);
 
+        menu = new JMenu("Search");
+        menu.setName("MenuSearch");
+        menuBar.add(menu);
+
+        menuItem = new JMenuItem("Start search", KeyEvent.VK_L);
+        menuItem.setName("MenuStartSearch");
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem("Previous search", KeyEvent.VK_P);
+        menuItem.setName("MenuPreviousMatch");
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem("Next match");
+        menuItem.setName("MenuNextMatch");
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem("Use regular expression");
+        menuItem.setName("MenuUseRegExp");
+        menu.add(menuItem);
+
     }
 
     public JPanel topBar() {
@@ -100,41 +121,43 @@ public class TextEditor extends JFrame {
         filenameField = new JTextField(30);
         filenameField.setName("FilenameField");
 
-        ImageIcon saveIcon = resizeImage(MAIN_DIR + SAVE_ICON, 25, 25);
+        ImageIcon saveIcon = resizeImage(MAIN_DIR + SAVE_ICON);
         saveButton = new JButton(saveIcon);
-       // saveButton = new JButton(new ImageIcon(MAIN_DIR + SAVE_ICON));
         saveButton.setName("SaveButton");
-    //    saveButton.setPreferredSize(new Dimension(30, 30));
 
+// TODO: Delete this section when done.
+//      Reconfigure dir for images to src, Set fields to private and reduce code duplication
+//        File file = new File("/Users/mac/Downloads/next.png");
+//        System.err.println(file.exists());
+//        System.out.println(new File("/Users/mac/Desktop/BetterReads/Text Editor/Text Editor/task/src/images/load1.png").exists());
 
-        File file = new File("/Users/mac/Downloads/next.png");
-        System.err.println(file.exists());
-        System.out.println(new File("/Users/mac/Desktop/BetterReads/Text Editor/Text Editor/task/src/images/load1.png").exists());
-
-        ImageIcon loadIcon = resizeImage(MAIN_DIR + LOAD_ICON, 25, 25);
+        ImageIcon loadIcon = resizeImage(MAIN_DIR + LOAD_ICON);
         loadButton = new JButton(loadIcon);
-      //  loadButton = new JButton(new ImageIcon(loadIcon));
-        loadButton.setName("LoadButton");
-       // loadButton.setPreferredSize(new Dimension(30, 30));
+        loadButton.setName("OpenButton");
 
-        ImageIcon searchIcon = resizeImage(MAIN_DIR + SEARCH_ICON, 25, 25);
+        ImageIcon searchIcon = resizeImage(MAIN_DIR + SEARCH_ICON);
         searchButton = new JButton(searchIcon);
-        searchButton.setName("SearchButton");
+        searchButton.setName("StartSearchButton");
 
-        ImageIcon prevIcon = resizeImage(MAIN_DIR + PREV_ICON, 25, 25);
+        ImageIcon prevIcon = resizeImage(MAIN_DIR + NEXT_ICON);
         prevButton = new JButton(prevIcon);
-        prevButton.setName("PreviousButton");
+        prevButton.setName("PreviousMatchButton");
 
-        ImageIcon nextIcon = resizeImage(MAIN_DIR + NEXT_ICON, 25, 25);
+        ImageIcon nextIcon = resizeImage(MAIN_DIR + PREV_ICON);
         nextButton = new JButton(nextIcon);
-        nextButton.setName("NextButton");
+        nextButton.setName("NextMatchButton");
 
-        topBar.add(filenameField);
-        topBar.add(saveButton);
+        regex = new JCheckBox("Use regex");
+        regex.setName("UseRegexCheckbox");
+
         topBar.add(loadButton);
+        topBar.add(saveButton);
+        topBar.add(filenameField);
         topBar.add(searchButton);
+        topBar.add(prevButton);
         topBar.add(nextButton);
         topBar.add(prevButton);
+        topBar.add(regex);
         return topBar;
     }
 
@@ -142,15 +165,14 @@ public class TextEditor extends JFrame {
         saveButton.addActionListener(e -> {
             File file = new File(filenameField.getText());
             fileWriter(file, textArea.getText());
-            System.err.println("File saved successfully");
         });
 
         loadButton.addActionListener(e -> {
             try {
                 textArea.setText(readFileAsString(filenameField.getText()));
-                System.err.println("File loaded successfully");
             } catch (IOException ex) {
                 textArea.setText(null);
+                ex.printStackTrace();
             }
         });
     }
@@ -178,8 +200,8 @@ public class TextEditor extends JFrame {
                 : new CompoundBorder(marginBorder, border));
     }
 
-    private ImageIcon resizeImage(String file, int width, int height) {
-        return new ImageIcon(new ImageIcon(file).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
+    private ImageIcon resizeImage(String file) {
+        return new ImageIcon(new ImageIcon(file).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
 
     }
 }
