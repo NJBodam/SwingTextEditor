@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="EditorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-04-27T15:27:27" hostname="Bodams-MacBook-Air.local" time="24.404">
+<testsuite name="EditorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-04-30T09:19:44" hostname="Bodams-MacBook-Air.local" time="24.026">
   <properties/>
-  <testcase name="start" classname="EditorTest" time="24.404"/>
+  <testcase name="start" classname="EditorTest" time="24.026"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 ?[1;31m
@@ -34,25 +34,25 @@ Start test 14?[0m
 Start test 15?[0m
 ?[1;31m
 Start test 16?[0m
+?[1;31m
+Start test 17?[0m
+?[1;31m
+Start test 18?[0m
+?[1;31m
+Start test 19?[0m
+?[1;31m
+Start test 20?[0m
+?[1;31m
+Start test 21?[0m
+?[1;31m
+Start test 22?[0m
+?[1;31m
+Start test 23?[0m
+?[1;31m
+Start test 24?[0m
+?[1;31m
+Start test 25?[0m
 ]]></system-out>
   <system-err><![CDATA[Warning: the fonts "Times" and "Times" are not available for the Java logical font "Serif", which may have unexpected appearance or behavior. Re-enable the "Times" font to remove this warning.
-File saved successfully
-File saved successfully
-File loaded successfully
-File saved successfully
-File loaded successfully
-File saved successfully
-File loaded successfully
-File saved successfully
-File loaded successfully
-File saved successfully
-File saved successfully
-File loaded successfully
-File saved successfully
-File loaded successfully
-File saved successfully
-File loaded successfully
-File saved successfully
-File loaded successfully
 ]]></system-err>
 </testsuite>
