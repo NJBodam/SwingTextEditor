@@ -150,11 +150,11 @@ public class TextEditor extends JFrame {
         searchButton = new JButton(searchIcon);
         searchButton.setName("StartSearchButton");
 
-        ImageIcon prevIcon = resizeImage(MAIN_DIR + NEXT_ICON);
+        ImageIcon prevIcon = resizeImage(MAIN_DIR + PREVgit_ICON);
         prevButton = new JButton(prevIcon);
         prevButton.setName("PreviousMatchButton");
 
-        ImageIcon nextIcon = resizeImage(MAIN_DIR + PREV_ICON);
+        ImageIcon nextIcon = resizeImage(MAIN_DIR + NEXT_ICON);
         nextButton = new JButton(nextIcon);
         nextButton.setName("NextMatchButton");
 
@@ -288,16 +288,16 @@ public class TextEditor extends JFrame {
         }).start();
     }
 
-//    public static void setMargin(JComponent aComponent, int aTop,
-//                                 int aRight, int aBottom, int aLeft) {
-//
-//        Border border = aComponent.getBorder();
-//
-//        Border marginBorder = new EmptyBorder(new Insets(aTop, aLeft,
-//                aBottom, aRight));
-//        aComponent.setBorder(border == null ? marginBorder
-//                : new CompoundBorder(marginBorder, border));
-//    }
+    public static void setMargin(JComponent aComponent, int aTop,
+                                 int aRight, int aBottom, int aLeft) {
+
+        Border border = aComponent.getBorder();
+
+        Border marginBorder = new EmptyBorder(new Insets(aTop, aLeft,
+                aBottom, aRight));
+        aComponent.setBorder(border == null ? marginBorder
+                : new CompoundBorder(marginBorder, border));
+    }
 
     private ImageIcon resizeImage(String file) {
         return new ImageIcon(new ImageIcon(file).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
