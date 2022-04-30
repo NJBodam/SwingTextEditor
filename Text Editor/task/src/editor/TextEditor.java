@@ -150,7 +150,7 @@ public class TextEditor extends JFrame {
         searchButton = new JButton(searchIcon);
         searchButton.setName("StartSearchButton");
 
-        ImageIcon prevIcon = resizeImage(MAIN_DIR + PREVgit_ICON);
+        ImageIcon prevIcon = resizeImage(MAIN_DIR + PREV_ICON);
         prevButton = new JButton(prevIcon);
         prevButton.setName("PreviousMatchButton");
 
