@@ -50,6 +50,7 @@ public class TextEditor extends JFrame {
         super("Text Editor");
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        setMaximumSize(new Dimension(WIDTH, HEIGHT));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -63,23 +64,13 @@ public class TextEditor extends JFrame {
         scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         appCont.add(scrollableTextArea, BorderLayout.CENTER);
-        appCont.add(new JLabel(" "), BorderLayout.SOUTH);
-        appCont.add(new JLabel("    "), BorderLayout.WEST);
-        appCont.add(new JLabel("    "), BorderLayout.EAST);
-        appCont.add(topBar(), BorderLayout.NORTH);
 
-        setVisible(true);
+        appCont.add(topBar(), BorderLayout.NORTH);
 
         actionListener(saveButton, loadButton, searchButton, prevButton, nextButton, regex);
 
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
-
-        jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        jfc.setName("FileChooser");
-        jfc.setDialogTitle("Select directory to save file: ");
-        add(jfc);
-
 
         JMenu menu = new JMenu("File");
         menu.setName("MenuFile");
@@ -129,6 +120,13 @@ public class TextEditor extends JFrame {
         menuItem.addActionListener(searchButton.getActionListeners()[0]);
         menuItem.addActionListener(e -> regex.setSelected(true));
         menu.add(menuItem);
+
+        setVisible(true);
+
+        jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        jfc.setName("FileChooser");
+        jfc.setDialogTitle("Select directory to save file: ");
+        appCont.add(jfc);
 
     }
 
